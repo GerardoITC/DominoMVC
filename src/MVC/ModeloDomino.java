@@ -98,14 +98,11 @@ public class ModeloDomino {
 
 	private ListaSencilla<JFicha> fichasRevueltas() {
 		ListaSencilla<JFicha> listaAux = new ListaSencilla<JFicha>();
-		int longitud = FichasMesa.length();
-		//*******CAMBIE EL 0 POR EL 1 EN EL NUM RANDOM
-		while (FichasMesa.Retirar(Rutinas.nextInt(1, (longitud)))) {
+		while(FichasMesa.length()>0) {
+			FichasMesa.Retirar(Rutinas.nextInt(1,FichasMesa.length()));
 			listaAux.InsertarFrente(FichasMesa.getDr());
-			longitud = FichasMesa.length();
-			if (longitud == 0)
-				break;
 		}
+
 		this.FichasMesa = listaAux;
 
 		return this.FichasMesa;
@@ -129,68 +126,57 @@ public class ModeloDomino {
 	}
 	public boolean fichaCorrecta(JFicha ficha) {
 		if(PrimerTiro) {
-			if(ficha.getLado1()==6) {
-				PrimerTiro=false;
+			if(ficha.getLado1()==6 && ficha.getLado2()==6) {
 				this.FichasTiradas.InsertarFrente(ficha);
-				this.Turno++;
-				if(Turno==4)this.Turno=0;
-				quitarFicaAlJugador(ficha);
+				coincideLado(ficha);
 				return true;
 			}
-			if(ficha.getLado2()==6) {
-				PrimerTiro=false;
-				this.FichasTiradas.InsertarFrente(ficha);
-				this.Turno++;
-				if(Turno==4)this.Turno=0;
-				quitarFicaAlJugador(ficha);
-				return true;
-			}
+
 			return false;
 		}
 
 		if (ficha.getLado1() == this.LD1 ) {
 			//pon izqu
 			this.FichasTiradas.InsertarFrente(ficha);
-			this.Turno++;
 			this.LD1=ficha.getLado2();
-			if(Turno==4)this.Turno=0;
-			quitarFicaAlJugador(ficha);
-			PasaronConsecutivamente=0;
+			coincideLado(ficha);
 			return true;
 		}
 		else if(ficha.getLado2() == this.LD1) {
 			//pon izqu
 			this.FichasTiradas.InsertarFrente(ficha);
-			this.Turno++;
 			this.LD1=ficha.getLado1();
-			if(Turno==4)this.Turno=0;
-			PasaronConsecutivamente=0;
-			quitarFicaAlJugador(ficha);
+			coincideLado(ficha);
+			
 			return true;
 		}
 		else if( ficha.getLado1() == this.LD2 ) {
 			//Pon derecha
 			this.FichasTiradas.InsertarFin(ficha);
-			this.Turno++;
 			this.LD2=ficha.getLado2();
-			if(Turno==4)this.Turno=0;
-			PasaronConsecutivamente=0;
-			quitarFicaAlJugador(ficha);
+			coincideLado(ficha);
+			
 			return true;
 		}
 		else if(ficha.getLado2() == this.LD2) {
 			//Pon derecha
-			this.FichasTiradas.InsertarFin(ficha);
-			this.Turno++;
 			this.LD2=ficha.getLado1();
-			if(Turno==4)this.Turno=0;
-			PasaronConsecutivamente=0;
-			quitarFicaAlJugador(ficha);
+			this.FichasTiradas.InsertarFin(ficha);
+			coincideLado(ficha);
+			
 			return true;
 		}
 		
 		return false;
 	}
+	private void coincideLado(JFicha ficha) {
+		PrimerTiro=false;
+		this.Turno++;
+		if(Turno==4)this.Turno=0;
+		PasaronConsecutivamente=0;
+		quitarFicaAlJugador(ficha);
+	}
+	
 	public void quitarFicaAlJugador(JFicha ficha) {
 		//buscar entre las fichas del jugador para quitarsela
 		this.FichasJugadores[ficha.getJugador()].Retirar(ficha);

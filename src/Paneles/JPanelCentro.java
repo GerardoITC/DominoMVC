@@ -23,8 +23,7 @@ public class JPanelCentro extends JPanel {
 
 	public JPanelCentro() {
 		//imagen = new ImageIcon(getClass().getResource("tablero.jpg")).getImage();
-		Color color=new Color(10, 152, 153);
-		setBackground(color);
+		colorFondo(true);
 		setLayout(new GridLayout(1,1));
 	}
 
@@ -35,7 +34,13 @@ public class JPanelCentro extends JPanel {
 //		setOpaque(false);
 //		super.paint(g);
 //	}
-
+	public void colorFondo(boolean b) {
+		Color color=new Color(10, 152, 153);
+		if(b)
+		setBackground(color);
+		else 
+			setBackground(null);
+	}
 	public void fichasMesa(ListaSencilla<JFicha> fichas) {
 		// Pintar las fichas en un panel 4x7
 		removeAll();

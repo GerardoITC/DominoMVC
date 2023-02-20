@@ -147,7 +147,6 @@ public class VistaDomino extends JFrame {
 		btnPaso2.addActionListener(c);
 		btnPaso3.addActionListener(c);
 		btnPaso4.addActionListener(c);
-
 	}
 
 	public void setControlador(ControladorDomino c, ListaSencilla<JFicha>[] fichas) {
@@ -172,7 +171,7 @@ public class VistaDomino extends JFrame {
 	}
 
 	public void setFichasJugadores(ListaSencilla<JFicha>[] fichasJugadores) {
-
+		pCentro.colorFondo(false);
 		int c = 0, k = 0;
 		for (int i = 0; i < 28; i++) {
 			JFicha aux = consigueFicha(c, k, fichasJugadores);
@@ -195,6 +194,7 @@ public class VistaDomino extends JFrame {
 				k++;
 			}
 		}
+		pCentro.colorFondo(true);
 	}
 	public void refrescaPJ() {
 

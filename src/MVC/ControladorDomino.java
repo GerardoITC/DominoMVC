@@ -65,7 +65,7 @@ public class ControladorDomino implements ActionListener {
 			int l2 = this.modelo.getLD2();
 			
 			if(modelo.revisaSiGano(ficha.getJugador())) {
-				this.vista.mensajeGano(ficha.getJugador());
+				this.vista.mensajeGano(ficha.getJugador()+1);
 			}
 			
 			this.vista.setEtiquetas(turno + 1, l1, l2);
