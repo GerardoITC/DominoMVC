@@ -42,7 +42,7 @@ public class ModeloDomino {
 		while (aux != null) {
 			aux.getInfo().setJugador(c);
 			String img = "src/imgs/" + aux.getInfo().getLado1() + "x" + aux.getInfo().getLado2() + ".JPG";
-			Icon iconoAux =Rutinas.AjustarImagen(img, 50, 50);
+			Icon iconoAux =Rutinas.AjustarImagen(img,30, 50);
 			aux.getInfo().setIcon(iconoAux);
 			FichasJugadores[c].InsertarFrente(aux.getInfo());
 			c++;
@@ -84,7 +84,7 @@ public class ModeloDomino {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 7; j++) {
 				String img = "src/imgs/" + L1 + "x" + L2 + ".JPG";
-				JFicha fichaAux = new JFicha(L1, L2, Rutinas.AjustarImagen(img, 90, 90), 0);
+				JFicha fichaAux = new JFicha(L1, L2, Rutinas.AjustarImagen(img, 90, 130), 0);
 				this.FichasMesa.InsertarFin(fichaAux);
 				L2++;
 				if (L2 > 6) {
